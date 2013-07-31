@@ -52,12 +52,12 @@ public class SlickCellRendererTest extends BasicGame {
 		acid.backgroundColor(0.2f, 0.2f, 0.2f);
 		acid.setIndexX(8);
 		acid.setIndexY(6);
-		acid.setCellSize(50);
+		acid.setCellSize(60);
 		
 		acid.color(0.2f, 1f, 0f);
-		acid.set(1, 1);
+		acid.put(1, 1);
 		acid.color(0.4f, 0f, 0.6f);
-		acid.set(2, 2);
+		acid.put(2, 2);
 		
 		// Set the element to the middle
 		acid.setPosition(gc.getWidth() / 2f - acid.getWidth() / 2f, 

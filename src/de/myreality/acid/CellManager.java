@@ -47,7 +47,7 @@ public interface CellManager {
 	 * @param indexX index x position for the cell
 	 * @param indexY index y position of the cell
 	 */
-	void set(int indexX, int indexY);
+	void put(int indexX, int indexY);
 	
 	/**
 	 * Sets a new color state

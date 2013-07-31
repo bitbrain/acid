@@ -80,7 +80,7 @@ public class Acid implements CellManager {
 	}
 
 	@Override
-	public void set(int x, int y) {
+	public void put(int x, int y) {
 		
 		Cell cell = new SimpleCell(x, y, r, g, b, a);
 		

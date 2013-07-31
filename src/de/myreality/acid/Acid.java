@@ -77,8 +77,12 @@ public class Acid implements CellManager {
 	}
 
 	@Override
-	public void set(float x, float y) {
+	public void set(int x, int y) {
+		Cell cell = new SimpleCell(x, y, r, g, b, a);
 		
+		if (!renderTargets.contains(cell)) {
+			renderTargets.add(cell);
+		}
 	}
 
 	@Override
@@ -91,7 +95,7 @@ public class Acid implements CellManager {
 
 	@Override
 	public void color(float r, float g, float b) {
-		color(r, g, b, a);
+		color(r, g, b, 1f);
 	}
 
 	@Override
@@ -196,6 +200,15 @@ public class Acid implements CellManager {
 		if (isClearingRequested()) {
 			renderer.createBuffer(getWidth(), getHeight(),
 					backgroundR, backgroundG, backgroundB, backgroundA);
+		} else if (!renderTargets.isEmpty()) {
+			for (Cell cell : renderTargets) {
+				renderer.drawCell(getCellSize() * cell.getIndexX(), 
+						          getCellSize() * cell.getIndexY(), 
+						          getCellSize(), getCellSize(), 
+						          cell.getRed(), cell.getGreen(), cell.getBlue(), cell.getAlpha());
+			}
+			
+			renderTargets.clear();
 		}
 		
 		renderer.drawBuffer(getX(), getY());

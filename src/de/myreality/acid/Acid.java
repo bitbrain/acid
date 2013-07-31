@@ -18,6 +18,9 @@
 
 package de.myreality.acid;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Main acid class which provides functionality to display a box
  * 
@@ -47,11 +50,18 @@ public class Acid implements CellManager {
 	
 	private float size;
 	
-	private boolean renderingRequested, clearingRequested;
+	private boolean clearingRequested;
+	
+	private Queue<Cell> renderTargets;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+	
+	public Acid(CellRenderer renderer) {
+		this.renderer = renderer;
+		this.renderTargets = new LinkedList<Cell>();
+	}
 
 	// ===========================================================
 	// Getters and Setters
@@ -163,6 +173,7 @@ public class Acid implements CellManager {
 
 	@Override
 	public void clear() {
+		renderTargets.clear();
 		clearingRequested = true;
 	}
 
@@ -185,19 +196,9 @@ public class Acid implements CellManager {
 		if (isClearingRequested()) {
 			renderer.createBuffer(getWidth(), getHeight(),
 					backgroundR, backgroundG, backgroundB, backgroundA);
-		} else if (isRenderingRequested()) {
-			
 		}
 		
 		renderer.drawBuffer(getX(), getY());
-	}
-	
-	private boolean isRenderingRequested() {
-		return renderingRequested;
-	}
-	
-	private void requestRendering() {
-		renderingRequested = true;
 	}
 	
 	private boolean isClearingRequested() {

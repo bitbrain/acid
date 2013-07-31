@@ -44,10 +44,10 @@ public interface CellManager {
 	/**
 	 * Sets a cell of the current color at the given position
 	 * 
-	 * @param x x position for the cell
-	 * @param y y position of the cell
+	 * @param indexX index x position for the cell
+	 * @param indexY index y position of the cell
 	 */
-	void set(float x, float y);
+	void set(float indexX, float indexY);
 	
 	/**
 	 * Sets a new color state
@@ -81,7 +81,7 @@ public interface CellManager {
 	boolean contains(float x, float y);
 	
 	/**
-	 * eturns the width of the element
+	 * Returns the width of the element
 	 * 
 	 * @return element width
 	 */

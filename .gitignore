@@ -1,5 +1,7 @@
 *.class
 bin/
+natives/
+lib/
 # Package Files #
 *.jar
 *.war

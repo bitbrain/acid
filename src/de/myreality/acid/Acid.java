@@ -59,8 +59,10 @@ public class Acid implements CellManager {
 	// ===========================================================
 	
 	public Acid(CellRenderer renderer) {
+		a = 1f;
 		this.renderer = renderer;
 		this.renderTargets = new LinkedList<Cell>();
+		clear();
 	}
 
 	// ===========================================================
@@ -78,6 +80,7 @@ public class Acid implements CellManager {
 
 	@Override
 	public void set(int x, int y) {
+		
 		Cell cell = new SimpleCell(x, y, r, g, b, a);
 		
 		if (!renderTargets.contains(cell)) {
@@ -198,8 +201,10 @@ public class Acid implements CellManager {
 	public void render() {
 		
 		if (isClearingRequested()) {
+
 			renderer.createBuffer(getWidth(), getHeight(),
 					backgroundR, backgroundG, backgroundB, backgroundA);
+			clearingRequested = false;
 		} else if (!renderTargets.isEmpty()) {
 			for (Cell cell : renderTargets) {
 				renderer.drawCell(getCellSize() * cell.getIndexX(), 

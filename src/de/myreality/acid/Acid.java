@@ -60,6 +60,7 @@ public class Acid implements CellManager {
 	
 	public Acid(CellRenderer renderer) {
 		a = 1f;
+		backgroundA = 1f;
 		this.renderer = renderer;
 		this.renderTargets = new LinkedList<Cell>();
 		clear();

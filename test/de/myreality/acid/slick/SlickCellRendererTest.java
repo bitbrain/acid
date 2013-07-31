@@ -49,18 +49,19 @@ public class SlickCellRendererTest extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		acid = new Acid(new SlickCellRenderer());
-		acid.backgroundColor(1f, 1f, 1f);
-		acid.setIndexX(10);
-		acid.setIndexY(10);
-		acid.setCellSize(30);
-		acid.color(0f, 0f, 0f);
-		for (int x = 0; x < acid.getIndexX(); x++) {
-			for (int y = 0; y < acid.getIndexY(); ++y) {
-				if (x % 2 == 0 && y % 2 == 0) {
-					acid.set(x, y);
-				}
-			}
-		}
+		acid.backgroundColor(0.2f, 0.2f, 0.2f);
+		acid.setIndexX(8);
+		acid.setIndexY(6);
+		acid.setCellSize(50);
+		
+		acid.color(0.2f, 1f, 0f);
+		acid.set(1, 1);
+		acid.color(0.4f, 0f, 0.6f);
+		acid.set(2, 2);
+		
+		// Set the element to the middle
+		acid.setPosition(gc.getWidth() / 2f - acid.getWidth() / 2f, 
+						 gc.getHeight() / 2f - acid.getHeight() / 2f);
 	}
 
 	@Override

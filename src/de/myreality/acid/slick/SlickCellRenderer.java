@@ -42,7 +42,7 @@ public class SlickCellRenderer implements CellRenderer {
 	// Fields
 	// ===========================================================
 	
-	private Image buffer;
+	private Image buffer, cellImage;
 	
 	private Color color;
 
@@ -57,6 +57,10 @@ public class SlickCellRenderer implements CellRenderer {
 	// ===========================================================
 	// Getters and Setters
 	// ===========================================================
+	
+	public void setCellImage(Image cellImage) {
+		this.cellImage = cellImage;
+	}
 
 	// ===========================================================
 	// Methods from Superclass
@@ -71,8 +75,13 @@ public class SlickCellRenderer implements CellRenderer {
 			color.b = b;
 			color.g = g;
 			color.a = a;
-			graphics.setColor(color);
-			graphics.fillRect(x, y, width, height);
+			
+			if (cellImage == null) {
+				graphics.setColor(color);
+				graphics.fillRect(x, y, width, height);
+			} else {
+				cellImage.draw(x, y, width, height, color);
+			}
 			graphics.flush();
 		} catch (SlickException e) {
 			e.printStackTrace();

@@ -43,7 +43,7 @@ public interface CellRenderer {
 	 * 
 	 * @param cell Cell to draw
 	 */
-	void drawCell(Cell cell);
+	void drawCell(float x, float y, float width, float height, float r, float g, float b, float a);
 	
 	/**
 	 * Draws a complete buffer to the screen.

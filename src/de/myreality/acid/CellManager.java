@@ -61,6 +61,17 @@ public interface CellManager {
 	void color(float r, float g, float b);
 	
 	/**
+	 * Sets a new background color state
+	 * 
+	 * @param r red
+	 * @param g green
+	 * @param b blue
+	 * @param a alpha
+	 */
+	void backgroundColor(float r, float g, float b, float a);
+	void backgroundColor(float r, float g, float b);
+	
+	/**
 	 * Checks if the position is contained
 	 * 
 	 * @param x x position
@@ -70,55 +81,100 @@ public interface CellManager {
 	boolean contains(float x, float y);
 	
 	/**
+	 * eturns the width of the element
 	 * 
-	 * @return
+	 * @return element width
 	 */
 	float getWidth();
 	
 	/**
+	 * Returns the height of the element
 	 * 
-	 * @return
+	 * @return element height
 	 */
 	float getHeight();
 	
 	/**
-	 * 
-	 * @return
+	 * @return x position
 	 */
 	float getX();
 	
 	/**
-	 * 
-	 * @return
+	 * @return y position
 	 */
 	float getY();
 	
 	/**
+	 * Set new bounds of this element
 	 * 
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
+	 * @param x x position
+	 * @param y y position
+	 * @param indexX new width index
+	 * @param indexY new height index
 	 */
-	void setBounds(float x, float y, float width, float height);
+	void setBounds(float x, float y, int indexX, int indexY);
 	
 	/**
+	 * Sets a new position of this element
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x x position
+	 * @param y y position
 	 */
 	void setPosition(float x, float y);
 	
 	/**
+	 * Sets a new cell size
 	 * 
-	 * @param width
-	 * @param height
-	 */
-	void setDimension(float width, float height);
-	
-	/**
-	 * 
-	 * @param size
+	 * @param size new size of the cell
 	 */
 	void setSize(float size);
+	
+	/**
+	 * Returns the current X index
+	 * 
+	 * @return current x index
+	 */
+	int getIndexX();
+	
+	/**
+	 * Returns the current Y index
+	 * 
+	 * @return current y index
+	 */
+	int getIndexY();
+	
+	/**
+	 * Sets a new x index
+	 * 
+	 * @param indexX x index to set
+	 */
+	void setIndexX(int indexX);
+	
+	/**
+	 * Sets a new y index
+	 * 
+	 * @param indexY y index to set
+	 */
+	void setIndexY(int indexY);
+	
+	/**
+	 * Sets a new cell size
+	 * 
+	 * @param size cell size
+	 */
+	void setCellSize(float size);
+	
+	/**
+	 * Returns the current cell size
+	 * 
+	 * @return cell size
+	 */
+	float getCellSize();
+	
+	/**
+	 * Clears the current box to the background color
+	 */
+	void clear();
+	
+	
 }

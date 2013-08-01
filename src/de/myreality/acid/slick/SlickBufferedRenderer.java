@@ -23,16 +23,17 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import de.myreality.acid.BufferedRenderer;
 import de.myreality.acid.CellRenderer;
 
 /**
- * 
+ * Implementation of a Slick2D cell renderer
  * 
  * @author Miguel Gonzalez <miguel-gonzalez@gmx.de>
- * @since 
- * @version 
+ * @since 1.0
+ * @version 1.0
  */
-public class SlickCellRenderer implements CellRenderer {	
+public class SlickBufferedRenderer implements BufferedRenderer {
 
 	// ===========================================================
 	// Constants
@@ -42,64 +43,60 @@ public class SlickCellRenderer implements CellRenderer {
 	// Fields
 	// ===========================================================
 	
-	private Image image;
-	
-	private SlickBufferedRenderer renderer;
+	private Image buffer;
 	
 	private Color color;
+	
+	private SlickCellRenderer cellRenderer;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 	
-	public SlickCellRenderer(Image image, SlickBufferedRenderer bufferedRenderer) {
-		this.image = image;
-		this.color = new Color(1f, 1f, 1f);
-		this.renderer = bufferedRenderer;
-	}
-	
-	public SlickCellRenderer(SlickBufferedRenderer bufferedRenderer) {
-		this(null, bufferedRenderer);
+	public SlickBufferedRenderer() {
+		this.color = new Color(0f, 0f, 0f);
+		cellRenderer = new SlickCellRenderer(this);
 	}
 
 	// ===========================================================
 	// Getters and Setters
 	// ===========================================================
 	
-	public void setImage(Image image) {
-		this.image = image;
+	public Image getBuffer() {
+		return buffer;
 	}
 
 	// ===========================================================
 	// Methods from Superclass
 	// ===========================================================
-	
+
 	@Override
-	public void drawCell(float x, float y, float width, float height, float r,
-			float g, float b, float a) {
-		
-		if (renderer != null) {
-			try {
-				Graphics graphics = renderer.getBuffer().getGraphics();
-				color.r = r;
-				color.b = b;
-				color.g = g;
-				color.a = a;
-				
-				if (image == null) {
-					graphics.setColor(color);
-					graphics.fillRect(x, y, width, height);
-				} else {
-					
-					graphics.drawImage(image, x, y, 
-										x + width, y + height, 
-										0, 0, image.getWidth(), image.getHeight(), color);
-				}
-				graphics.flush();
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
+	public void drawBuffer(float x, float y) {
+		buffer.draw(x, y);
+	}
+
+	@Override
+	public void createBuffer(float width, float height, float r, float g,
+			float b, float a) {
+		try {
+			buffer = new Image((int) width, (int) height);
+			Graphics graphics = buffer.getGraphics();
+			color.r = r;
+			color.b = b;
+			color.g = g;
+			color.a = a;
+			System.out.println(color);
+			graphics.setColor(color);
+			graphics.fillRect(0, 0, width, height);
+			graphics.flush();
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public CellRenderer getCellRenderer() {
+		return cellRenderer;
 	}
 
 	// ===========================================================

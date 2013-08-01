@@ -38,7 +38,7 @@ public class Acid implements CellManager {
 	// Fields
 	// ===========================================================
 	
-	private CellRenderer renderer;
+	private BufferedRenderer renderer;
 	
 	private float x, y;
 	
@@ -58,7 +58,7 @@ public class Acid implements CellManager {
 	// Constructors
 	// ===========================================================
 	
-	public Acid(CellRenderer renderer) {
+	public Acid(BufferedRenderer renderer) {
 		a = 1f;
 		backgroundA = 1f;
 		this.renderer = renderer;
@@ -75,18 +75,24 @@ public class Acid implements CellManager {
 	// ===========================================================
 	
 	@Override
-	public CellRenderer getRenderer() {
+	public BufferedRenderer getRenderer() {
 		return renderer;
 	}
+	
+
 
 	@Override
-	public void put(int x, int y) {
-		
-		Cell cell = new SimpleCell(x, y, r, g, b, a);
+	public void put(int indexX, int indexY, CellRenderer renderer) {
+		Cell cell = new SimpleCell(indexX, indexY, r, g, b, a, renderer);
 		
 		if (!renderTargets.contains(cell)) {
 			renderTargets.add(cell);
 		}
+	}
+
+	@Override
+	public void put(int indexX, int indexY) {
+		put(indexX, indexY, renderer.getCellRenderer());
 	}
 
 	@Override
@@ -186,6 +192,17 @@ public class Acid implements CellManager {
 	}
 
 	@Override
+	public void clear(int indexX, int indexY) {
+		float tmpR = r;
+		float tmpG = g;
+		float tmpB = b;
+		float tmpA = a;
+		color(backgroundR, backgroundG, backgroundB, backgroundA);
+		put(indexX, indexY);
+		color(tmpR, tmpG, tmpB, tmpA);
+	}
+
+	@Override
 	public void setCellSize(float size) {
 		this.size = size;
 	}
@@ -208,7 +225,7 @@ public class Acid implements CellManager {
 			clearingRequested = false;
 		} else if (!renderTargets.isEmpty()) {
 			for (Cell cell : renderTargets) {
-				renderer.drawCell(getCellSize() * cell.getIndexX(), 
+				cell.getRenderer().drawCell(getCellSize() * cell.getIndexX(), 
 						          getCellSize() * cell.getIndexY(), 
 						          getCellSize(), getCellSize(), 
 						          cell.getRed(), cell.getGreen(), cell.getBlue(), cell.getAlpha());

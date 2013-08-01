@@ -38,12 +38,14 @@ class SimpleCell implements Cell {
 	private int indexX, indexY;
 	
 	private float r, g, b, a;
+	
+	private CellRenderer renderer;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	SimpleCell(int indexX, int indexY, float r, float g, float b, float a) {
+	SimpleCell(int indexX, int indexY, float r, float g, float b, float a, CellRenderer renderer) {
 		super();
 		this.indexX = indexX;
 		this.indexY = indexY;
@@ -51,6 +53,7 @@ class SimpleCell implements Cell {
 		this.g = g;
 		this.b = b;
 		this.a = a;
+		this.renderer = renderer;
 	}
 
 	// ===========================================================
@@ -60,6 +63,11 @@ class SimpleCell implements Cell {
 	// ===========================================================
 	// Methods from Superclass
 	// ===========================================================
+
+	@Override
+	public CellRenderer getRenderer() {
+		return renderer;
+	}
 	
 	@Override
 	public int getIndexX() {

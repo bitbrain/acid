@@ -64,4 +64,10 @@ public interface Cell {
 	 * @return the amount of alpha opacity
 	 */
 	float getAlpha();
+	
+	/**
+	 * Returns the current cell renderer to draw this cell
+	 * @return current cell renderer
+	 */
+	CellRenderer getRenderer();
 }

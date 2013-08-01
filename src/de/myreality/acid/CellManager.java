@@ -39,7 +39,7 @@ public interface CellManager {
 	/**
 	 * @return Returns the current cell renderer
 	 */
-	CellRenderer getRenderer();
+	BufferedRenderer getRenderer();
 	
 	/**
 	 * Sets a cell of the current color at the given position
@@ -48,6 +48,7 @@ public interface CellManager {
 	 * @param indexY index y position of the cell
 	 */
 	void put(int indexX, int indexY);
+	void put(int indexX, int indexY, CellRenderer renderer);
 	
 	/**
 	 * Sets a new color state
@@ -175,6 +176,7 @@ public interface CellManager {
 	 * Clears the current box to the background color
 	 */
 	void clear();
+	void clear(int indexX, int indexY);
 	
 	
 }

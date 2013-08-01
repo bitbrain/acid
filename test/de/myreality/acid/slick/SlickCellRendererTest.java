@@ -22,6 +22,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import de.myreality.acid.Acid;
@@ -36,19 +37,23 @@ import de.myreality.acid.Acid;
 public class SlickCellRendererTest extends BasicGame {
 	
 	private Acid acid;
+	
+	private Image image;
 
 	public SlickCellRendererTest(String title) {
 		super(title);
 	}
 
 	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException {
+	public void render(GameContainer gc, Graphics g) throws SlickException {		
 		acid.render();
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		acid = new Acid(new SlickCellRenderer());
+		
+		SlickBufferedRenderer renderer = new SlickBufferedRenderer();
+		acid = new Acid(renderer);
 		acid.backgroundColor(0.2f, 0.2f, 0.2f);
 		acid.setIndexX(8);
 		acid.setIndexY(6);
@@ -58,6 +63,12 @@ public class SlickCellRendererTest extends BasicGame {
 		acid.put(1, 1);
 		acid.color(0.4f, 0f, 0.6f);
 		acid.put(2, 2);
+
+		image = new Image("banner.png");
+		
+		SlickCellRenderer bannerRenderer = new SlickCellRenderer(image, renderer);
+		
+		acid.put(3, 3, bannerRenderer);
 		
 		// Set the element to the middle
 		acid.setPosition(gc.getWidth() / 2f - acid.getWidth() / 2f, 

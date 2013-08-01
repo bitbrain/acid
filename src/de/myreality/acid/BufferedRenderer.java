@@ -19,13 +19,13 @@
 package de.myreality.acid;
 
 /**
- * 
+ * Renderer which handles the rendering of a single cell
  * 
  * @author Miguel Gonzalez <miguel-gonzalez@gmx.de>
- * @since 
- * @version 
+ * @since 1.0
+ * @version 1.0
  */
-public interface CellRenderer {
+public interface BufferedRenderer {
 
 	// ===========================================================
 	// Constants
@@ -36,12 +36,32 @@ public interface CellRenderer {
 	// ===========================================================
 	
 	/**
-	 * Draws a single cell at the contained position. 
-	 * <p>
-	 * Be aware of that this method is only called when something has changed. 
-	 * Therefore, draw to a buffer of your choice.
+	 * Returns the current cell renderer
 	 * 
-	 * @param cell Cell to draw
+	 * @return cell renderer
 	 */
-	void drawCell(float x, float y, float width, float height, float r, float g, float b, float a);
+	CellRenderer getCellRenderer();
+	
+	
+	/**
+	 * Draws a complete buffer to the screen.
+	 * <p>
+	 * Make sure to draw the buffer here!
+	 * 
+	 * @param x x position of the buffer
+	 * @param y y position of the buffer
+	 */
+	void drawBuffer(float x, float y);
+	
+	/**
+	 * Create a new buffer with the given width and height
+	 * 
+	 * @param width width of the buffer
+	 * @param height height of the buffer
+	 * @param r red amount of the buffer
+	 * @param g green amount of the buffer
+	 * @param b blue amount of the buffer
+	 * @param a alpha amount of the buffer
+	 */
+	void createBuffer(float width, float height, float r, float g, float b, float a);
 }

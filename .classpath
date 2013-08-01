@@ -19,5 +19,10 @@
 	<classpathentry kind="lib" path="lib/slick.jar"/>
 	<classpathentry kind="lib" path="lib/tinylinepp.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="lib/gdx-backend-lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="lib/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="lib/gdx.jar" sourcepath="lib/gdx-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

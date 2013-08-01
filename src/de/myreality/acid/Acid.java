@@ -225,12 +225,15 @@ public class Acid implements CellManager {
 			clearingRequested = false;
 		} else if (!renderTargets.isEmpty()) {
 			for (Cell cell : renderTargets) {
-				cell.getRenderer().drawCell(getCellSize() * cell.getIndexX(), 
+				CellRenderer cellRenderer = cell.getRenderer();
+				if (cellRenderer != null) {
+					cellRenderer.drawCell(getCellSize() * cell.getIndexX(), 
 						          getCellSize() * cell.getIndexY(), 
 						          getCellSize(), getCellSize(), 
 						          cell.getRed(), cell.getGreen(), cell.getBlue(), cell.getAlpha());
+				}
 			}
-			
+
 			renderTargets.clear();
 		}
 		

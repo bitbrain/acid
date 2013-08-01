@@ -18,6 +18,8 @@
 
 package de.myreality.acid.gdx;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 
 import de.myreality.acid.CellRenderer;
@@ -67,8 +69,27 @@ public class GdxCellRenderer implements CellRenderer {
 	@Override
 	public void drawCell(float x, float y, float width, float height, float r,
 			float g, float b, float a) {
+		Texture buffer = renderer.getBuffer();
+		if (buffer != null) {			
+			
+			if (image != null) {
+				image.getTextureData().prepare();
+				Pixmap map = image.getTextureData().consumePixmap();
+				Pixmap tmp = new Pixmap((int)width, (int)height, Format.RGBA8888);
+				tmp.drawPixmap(map, 0, 0, 
+							map.getWidth(), map.getHeight(), 0, 0, (int)width, (int)height);
 		
-		
+				tmp.setColor(r, g, b, a);
+				buffer.draw(tmp, (int)x, (int)y);
+				image.getTextureData().disposePixmap();
+				tmp.dispose();
+			} else {
+				Pixmap map = new Pixmap((int)width, (int)height, Format.RGBA8888);
+				map.setColor(r, g, b, a);
+				map.fillRectangle(0, 0, (int)width, (int)height);
+				buffer.draw(map, (int)x, (int)y);
+			}
+		}
 	}
 
 	// ===========================================================

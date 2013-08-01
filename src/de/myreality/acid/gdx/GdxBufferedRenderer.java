@@ -18,6 +18,11 @@
 
 package de.myreality.acid.gdx;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import de.myreality.acid.BufferedRenderer;
 import de.myreality.acid.CellRenderer;
 
@@ -39,6 +44,10 @@ public class GdxBufferedRenderer implements BufferedRenderer {
 	// ===========================================================
 	
 	private GdxCellRenderer cellRenderer;
+	
+	private Texture buffer;
+	
+	private SpriteBatch batch;
 
 	// ===========================================================
 	// Constructors
@@ -51,6 +60,10 @@ public class GdxBufferedRenderer implements BufferedRenderer {
 	// ===========================================================
 	// Getters and Setters
 	// ===========================================================
+	
+	public Texture getBuffer() {
+		return buffer;
+	}
 
 	// ===========================================================
 	// Methods from Superclass
@@ -63,13 +76,22 @@ public class GdxBufferedRenderer implements BufferedRenderer {
 
 	@Override
 	public void drawBuffer(float x, float y) {
-
+		batch.begin();
+		batch.draw(buffer, x, y);
+		batch.end();
 	}
 
 	@Override
 	public void createBuffer(float width, float height, float r, float g,
 			float b, float a) {
-
+		batch = new SpriteBatch();	
+		Pixmap map = new Pixmap((int)width,(int)height, Format.RGBA8888);
+		map.setColor(r, g, b, a);
+		map.fillRectangle(0, 0, (int)width, (int)height);
+		buffer = new Texture(map);
+		buffer.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Linear);
+		buffer.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
+		map.dispose();
 	}
 
 	// ===========================================================

@@ -70,25 +70,25 @@ public class GdxCellRenderer implements CellRenderer {
 	public void drawCell(float x, float y, float width, float height, float r,
 			float g, float b, float a) {
 		Texture buffer = renderer.getBuffer();
-		if (buffer != null) {			
+		if (buffer != null) {	
+			
+
+			Pixmap map = new Pixmap((int)width, (int)height, Format.RGBA8888);			
+			map.setColor(r, g, b, a);
 			
 			if (image != null) {
 				image.getTextureData().prepare();
-				Pixmap map = image.getTextureData().consumePixmap();
-				Pixmap tmp = new Pixmap((int)width, (int)height, Format.RGBA8888);
-				tmp.drawPixmap(map, 0, 0, 
-							map.getWidth(), map.getHeight(), 0, 0, (int)width, (int)height);
-		
-				tmp.setColor(r, g, b, a);
-				buffer.draw(tmp, (int)x, (int)y);
+				Pixmap tmp = image.getTextureData().consumePixmap();
+				
+				map.drawPixmap(tmp, 0, 0, 
+						tmp.getWidth(), tmp.getHeight(), 0, 0, (int)width, (int)height);		
 				image.getTextureData().disposePixmap();
-				tmp.dispose();
 			} else {
-				Pixmap map = new Pixmap((int)width, (int)height, Format.RGBA8888);
-				map.setColor(r, g, b, a);
 				map.fillRectangle(0, 0, (int)width, (int)height);
-				buffer.draw(map, (int)x, (int)y);
 			}
+			
+			buffer.draw(map, (int)x, (int)y);
+			map.dispose();
 		}
 	}
 

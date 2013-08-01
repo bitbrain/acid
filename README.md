@@ -18,7 +18,9 @@ The following libraries are automatically supported:
 A short example in Slick2D. The following code:
 
 ```java
-acid = new Acid(new SlickCellRenderer());
+// JavaFX: FXBufferedRenderer()
+// LibGDX: GdxBufferedRenderer()
+acid = new Acid(new SlickBufferedRenderer());
 		acid.backgroundColor(0.2f, 0.2f, 0.2f);
 		acid.setIndexX(8);
 		acid.setIndexY(6);

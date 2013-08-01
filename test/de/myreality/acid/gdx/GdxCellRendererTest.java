@@ -18,8 +18,6 @@
 
 package de.myreality.acid.gdx;
 
-import org.newdawn.slick.Image;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -28,8 +26,6 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 
 import de.myreality.acid.Acid;
-import de.myreality.acid.slick.SlickBufferedRenderer;
-import de.myreality.acid.slick.SlickCellRenderer;
 
 /**
  * 

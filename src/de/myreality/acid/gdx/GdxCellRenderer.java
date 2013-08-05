@@ -63,6 +63,10 @@ public class GdxCellRenderer implements CellRenderer {
 	// ===========================================================
 	// Getters and Setters
 	// ===========================================================
+	
+	public void setTexture(Texture texture) {
+		this.image = texture;
+	}
 
 	// ===========================================================
 	// Methods from Superclass

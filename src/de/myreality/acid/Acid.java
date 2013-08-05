@@ -215,7 +215,11 @@ public class Acid implements CellManager {
 
 	@Override
 	public void setCellRenderer(CellRenderer renderer) {
-		this.cellRenderer = renderer;
+		if (renderer != null) {
+			this.cellRenderer = renderer;
+		} else {
+			this.cellRenderer = bufferedRenderer.getDefaultCellRenderer();
+		}
 	}
 
 

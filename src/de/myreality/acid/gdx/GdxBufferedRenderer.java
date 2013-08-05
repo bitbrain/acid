@@ -43,7 +43,7 @@ public class GdxBufferedRenderer implements BufferedRenderer {
 	// Fields
 	// ===========================================================
 	
-	private GdxCellRenderer cellRenderer;
+	private CellRenderer cellRenderer;
 	
 	private Texture buffer;
 	
@@ -64,13 +64,17 @@ public class GdxBufferedRenderer implements BufferedRenderer {
 	public Texture getBuffer() {
 		return buffer;
 	}
+	
+	public SpriteBatch getSpriteBatch() {
+		return batch;
+	}
 
 	// ===========================================================
 	// Methods from Superclass
 	// ===========================================================
 	
 	@Override
-	public CellRenderer getCellRenderer() {
+	public CellRenderer getDefaultCellRenderer() {
 		return cellRenderer;
 	}
 

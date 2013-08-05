@@ -33,12 +33,18 @@ public class Acid implements CellManager {
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	
+	public static final float DEFAULT_CELL_SIZE = 64f;
+	
+	public static final int DEFAULT_INDEX = 5;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
 	
-	private BufferedRenderer renderer;
+	private BufferedRenderer bufferedRenderer;
+	
+	private CellRenderer cellRenderer;
 	
 	private float x, y;
 	
@@ -58,12 +64,28 @@ public class Acid implements CellManager {
 	// Constructors
 	// ===========================================================
 	
-	public Acid(BufferedRenderer renderer) {
+	public Acid(int indexX, int indexY, float size, BufferedRenderer renderer) {
 		a = 1f;
 		backgroundA = 1f;
-		this.renderer = renderer;
+		this.indexX = indexX;
+		this.indexY = indexY;
+		this.size = size;
+		this.bufferedRenderer = renderer;
+		this.cellRenderer = renderer.getDefaultCellRenderer();
 		this.renderTargets = new LinkedList<Cell>();
 		clear();
+	}
+	
+	public Acid(int indexX, int indexY, BufferedRenderer renderer) {
+		this(indexX, indexY, DEFAULT_CELL_SIZE, renderer);
+	}
+	
+	public Acid(float size, BufferedRenderer renderer) {
+		this(DEFAULT_INDEX, DEFAULT_INDEX, size, renderer);
+	}
+	
+	public Acid(BufferedRenderer renderer) {
+		this(DEFAULT_CELL_SIZE, renderer);
 	}
 
 	// ===========================================================
@@ -75,24 +97,17 @@ public class Acid implements CellManager {
 	// ===========================================================
 	
 	@Override
-	public BufferedRenderer getRenderer() {
-		return renderer;
+	public BufferedRenderer getBufferedRenderer() {
+		return bufferedRenderer;
 	}
 	
-
-
 	@Override
-	public void put(int indexX, int indexY, CellRenderer renderer) {
-		Cell cell = new SimpleCell(indexX, indexY, r, g, b, a, renderer);
+	public void put(int indexX, int indexY) {
+		Cell cell = new SimpleCell(indexX, indexY, r, g, b, a, cellRenderer);
 		
 		if (!renderTargets.contains(cell)) {
 			renderTargets.add(cell);
 		}
-	}
-
-	@Override
-	public void put(int indexX, int indexY) {
-		put(indexX, indexY, renderer.getCellRenderer());
 	}
 
 	@Override
@@ -148,21 +163,9 @@ public class Acid implements CellManager {
 	}
 
 	@Override
-	public void setBounds(float x, float y, int indexX, int indexY) {
-		setPosition(x, y);
-		setIndexX(indexX);
-		setIndexY(indexY);
-	}
-
-	@Override
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	@Override
-	public void setSize(float size) {
-		this.size = size;
 	}
 
 	@Override
@@ -173,16 +176,6 @@ public class Acid implements CellManager {
 	@Override
 	public int getIndexY() {
 		return indexY;
-	}
-
-	@Override
-	public void setIndexX(int indexX) {
-		this.indexX = indexX;
-	}
-
-	@Override
-	public void setIndexY(int indexY) {
-		this.indexY = indexY;
 	}
 
 	@Override
@@ -203,14 +196,25 @@ public class Acid implements CellManager {
 	}
 
 	@Override
-	public void setCellSize(float size) {
-		this.size = size;
-	}
-
-	@Override
 	public float getCellSize() {
 		return size;
 	}
+
+	@Override
+	public void setBufferedRenderer(BufferedRenderer renderer) {
+		this.bufferedRenderer = renderer;
+	}
+
+	@Override
+	public CellRenderer getCellRenderer() {
+		return cellRenderer;
+	}
+
+	@Override
+	public void setCellRenderer(CellRenderer renderer) {
+		this.cellRenderer = renderer;
+	}
+
 
 	// ===========================================================
 	// Methods
@@ -220,7 +224,7 @@ public class Acid implements CellManager {
 		
 		if (isClearingRequested()) {
 
-			renderer.createBuffer(getWidth(), getHeight(),
+			bufferedRenderer.createBuffer(getWidth(), getHeight(),
 					backgroundR, backgroundG, backgroundB, backgroundA);
 			clearingRequested = false;
 		} else if (!renderTargets.isEmpty()) {
@@ -237,13 +241,13 @@ public class Acid implements CellManager {
 			renderTargets.clear();
 		}
 		
-		renderer.drawBuffer(getX(), getY());
+		bufferedRenderer.drawBuffer(getX(), getY());
 	}
 	
 	private boolean isClearingRequested() {
 		return clearingRequested;
 	}
-
+	
 	// ===========================================================
 	// Inner classes
 	// ===========================================================

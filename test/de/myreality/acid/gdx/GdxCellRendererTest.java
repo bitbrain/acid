@@ -43,11 +43,8 @@ public class GdxCellRendererTest implements ApplicationListener {
 	@Override
 	public void create() {
 		GdxBufferedRenderer renderer = new GdxBufferedRenderer();
-		acid = new Acid(renderer);
+		acid = new Acid(8, 6, 60f, renderer);
 		acid.backgroundColor(0.2f, 0.2f, 0.2f);
-		acid.setIndexX(8);
-		acid.setIndexY(6);
-		acid.setCellSize(60);
 		
 		acid.color(0.2f, 1f, 0f);
 		acid.put(1, 1);
@@ -57,7 +54,8 @@ public class GdxCellRendererTest implements ApplicationListener {
 		texture = new Texture("banner.png");
 		GdxCellRenderer bannerRenderer = new GdxCellRenderer(texture, renderer);
 		
-		acid.put(3, 3, bannerRenderer);
+		acid.setCellRenderer(bannerRenderer);
+		acid.put(3, 3);
 		
 		// Set the element to the middle
 		acid.setPosition(Gdx.graphics.getWidth() / 2f - acid.getWidth() / 2f, 

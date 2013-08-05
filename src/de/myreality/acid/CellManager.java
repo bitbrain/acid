@@ -39,8 +39,29 @@ public interface CellManager {
 	/**
 	 * @return Returns the current cell renderer
 	 */
-	BufferedRenderer getRenderer();
+	BufferedRenderer getBufferedRenderer();
 	
+	/**
+	 * Sets a new buffered renderer
+	 * 
+	 * @param renderer new buffered renderer
+	 */
+	void setBufferedRenderer(BufferedRenderer renderer);
+	
+	/**
+	 * Returns the current cell renderer
+	 * 
+	 * @return current cell renderer
+	 */
+	CellRenderer getCellRenderer();
+	
+	/**
+	 * Sets a new cell renderer
+	 * 
+	 * @param renderer new cell renderer
+	 */
+	void setCellRenderer(CellRenderer renderer);
+
 	/**
 	 * Sets a cell of the current color at the given position
 	 * 
@@ -48,7 +69,6 @@ public interface CellManager {
 	 * @param indexY index y position of the cell
 	 */
 	void put(int indexX, int indexY);
-	void put(int indexX, int indexY, CellRenderer renderer);
 	
 	/**
 	 * Sets a new color state
@@ -106,29 +126,12 @@ public interface CellManager {
 	float getY();
 	
 	/**
-	 * Set new bounds of this element
-	 * 
-	 * @param x x position
-	 * @param y y position
-	 * @param indexX new width index
-	 * @param indexY new height index
-	 */
-	void setBounds(float x, float y, int indexX, int indexY);
-	
-	/**
 	 * Sets a new position of this element
 	 * 
 	 * @param x x position
 	 * @param y y position
 	 */
 	void setPosition(float x, float y);
-	
-	/**
-	 * Sets a new cell size
-	 * 
-	 * @param size new size of the cell
-	 */
-	void setSize(float size);
 	
 	/**
 	 * Returns the current X index
@@ -143,27 +146,6 @@ public interface CellManager {
 	 * @return current y index
 	 */
 	int getIndexY();
-	
-	/**
-	 * Sets a new x index
-	 * 
-	 * @param indexX x index to set
-	 */
-	void setIndexX(int indexX);
-	
-	/**
-	 * Sets a new y index
-	 * 
-	 * @param indexY y index to set
-	 */
-	void setIndexY(int indexY);
-	
-	/**
-	 * Sets a new cell size
-	 * 
-	 * @param size cell size
-	 */
-	void setCellSize(float size);
 	
 	/**
 	 * Returns the current cell size

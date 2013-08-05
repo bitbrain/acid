@@ -40,8 +40,7 @@ public interface BufferedRenderer {
 	 * 
 	 * @return cell renderer
 	 */
-	CellRenderer getCellRenderer();
-	
+	CellRenderer getDefaultCellRenderer();	
 	
 	/**
 	 * Draws a complete buffer to the screen.

@@ -89,8 +89,7 @@ public class SlickCellRenderer implements CellRenderer {
 				if (image == null) {
 					graphics.setColor(color);
 					graphics.fillRect(x, y, width, height);
-				} else {
-					
+				} else {		
 					graphics.drawImage(image, x, y, 
 										x + width, y + height, 
 										0, 0, image.getWidth(), image.getHeight(), color);

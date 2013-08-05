@@ -47,7 +47,7 @@ public class SlickBufferedRenderer implements BufferedRenderer {
 	
 	private Color color;
 	
-	private SlickCellRenderer cellRenderer;
+	private CellRenderer cellRenderer;
 
 	// ===========================================================
 	// Constructors
@@ -85,7 +85,6 @@ public class SlickBufferedRenderer implements BufferedRenderer {
 			color.b = b;
 			color.g = g;
 			color.a = a;
-			System.out.println(color);
 			graphics.setColor(color);
 			graphics.fillRect(0, 0, width, height);
 			graphics.flush();
@@ -95,7 +94,7 @@ public class SlickBufferedRenderer implements BufferedRenderer {
 	}
 
 	@Override
-	public CellRenderer getCellRenderer() {
+	public CellRenderer getDefaultCellRenderer() {
 		return cellRenderer;
 	}
 

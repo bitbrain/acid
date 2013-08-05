@@ -59,6 +59,8 @@ public class Acid implements CellManager {
 	private boolean clearingRequested;
 	
 	private Queue<Cell> renderTargets;
+	
+	private int padding;
 
 	// ===========================================================
 	// Constructors
@@ -73,6 +75,7 @@ public class Acid implements CellManager {
 		this.bufferedRenderer = renderer;
 		this.cellRenderer = renderer.getDefaultCellRenderer();
 		this.renderTargets = new LinkedList<Cell>();
+		this.padding = 0;
 		clear();
 	}
 	
@@ -216,6 +219,41 @@ public class Acid implements CellManager {
 	}
 
 
+
+	@Override
+	public float translateIndexX(int indexX) {
+		return getX() + getCellSize() * indexX;
+	}
+
+	@Override
+	public float translateIndexY(int indexY) {
+		return getY() + getCellSize() + indexY;
+	}
+
+	@Override
+	public int translateRealX(float x) {
+		x -= getX();
+		
+		return (int) Math.floor(x / getCellSize());
+	}
+
+	@Override
+	public int translateRealY(float y) {
+		y -= getY();
+		
+		return (int) Math.floor(y / getCellSize());
+	}
+
+	@Override
+	public void setPadding(int padding) {
+		this.padding = padding;
+	}
+
+	@Override
+	public int getPadding() {
+		return padding;
+	}
+	
 	// ===========================================================
 	// Methods
 	// ===========================================================
@@ -231,9 +269,9 @@ public class Acid implements CellManager {
 			for (Cell cell : renderTargets) {
 				CellRenderer cellRenderer = cell.getRenderer();
 				if (cellRenderer != null) {
-					cellRenderer.drawCell(getCellSize() * cell.getIndexX(), 
-						          getCellSize() * cell.getIndexY(), 
-						          getCellSize(), getCellSize(), 
+					cellRenderer.drawCell(getCellSize() * cell.getIndexX() + getPadding(), 
+						          getCellSize() * cell.getIndexY() + getPadding(), 
+						          getCellSize() - getPadding() * 2, getCellSize() - getPadding() * 2, 
 						          cell.getRed(), cell.getGreen(), cell.getBlue(), cell.getAlpha());
 				}
 			}

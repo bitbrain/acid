@@ -160,5 +160,43 @@ public interface CellManager {
 	void clear();
 	void clear(int indexX, int indexY);
 	
+	/**
+	 * 
+	 * @param indexX
+	 * @return
+	 */
+	float translateIndexX(int indexX);
 	
+	/**
+	 * 
+	 * @param indexY
+	 * @return
+	 */
+	float translateIndexY(int indexY);
+	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
+	int translateRealX(float x);
+	
+	/**
+	 * 
+	 * @param y
+	 * @return
+	 */
+	int translateRealY(float y);
+	
+	/**
+	 * 
+	 * @param padding
+	 */
+	void setPadding(int padding);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	int getPadding();
 }
